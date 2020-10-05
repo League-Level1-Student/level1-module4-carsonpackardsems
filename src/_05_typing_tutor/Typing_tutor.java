@@ -9,20 +9,19 @@ import javax.swing.JLabel;
 
 public class Typing_tutor implements KeyListener {
 	char currentLetter;
-	
+	JLabel l = new JLabel();
 	Typing_tutor(){
 		currentLetter = generateRandomLetter();
-		JFrame f = new JFrame();	
-		JLabel l = new JLabel();
+		JFrame f = new JFrame();
 		f.setVisible(true);
-		f.setTitle("Type Fever");
+		f.setTitle("Type, Type, Type!(or die)");
 		f.add(l);
 		l.setText("" + currentLetter);
 		l.setFont(l.getFont().deriveFont(28.0f));
 		l.setHorizontalAlignment(JLabel.CENTER);
 		f.addKeyListener(this);
 		f.pack();
-		f.setSize(250, 100);
+		f.setSize(300, 100);
 	}
 	
 	char generateRandomLetter() {
@@ -36,17 +35,17 @@ public class Typing_tutor implements KeyListener {
 	@Override
 	public void keyPressed(KeyEvent arg0) {
 		// TODO Auto-generated method stub
-	
+		
+		currentLetter = generateRandomLetter();
+		l.setText("" + currentLetter);
+		l.setFont(l.getFont().deriveFont(28.0f));
+		l.setHorizontalAlignment(JLabel.CENTER);
 	}
 
 	@Override
 	public void keyReleased(KeyEvent arg0) {
 		// TODO Auto-generated method stub
-		currentLetter = generateRandomLetter();
-		/*l.setText("" + currentLetter);
-		l.setFont(l.getFont().deriveFont(28.0f));
-		l.setHorizontalAlignment(JLabel.CENTER);
-		*/
+		//What the heck do I do  now?
 	}
 
 	@Override
