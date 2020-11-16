@@ -2,15 +2,19 @@ package _11_whack_a_mole;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Date;
 import java.util.Random;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class WhackAMole implements ActionListener {
-JFrame f = new JFrame();
+int fails = 0;
+int mw = 0;
+	JFrame f = new JFrame();
 JPanel p = new JPanel();
 Random r = new Random();
 JLabel l = new JLabel();
@@ -29,6 +33,8 @@ void drawButtons(int random){
 		p.add(b1);
 	}
 	f.add(p);
+	f.pack();
+	f.setSize(250, 400);
 }
 WhackAMole(){
 	f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -46,10 +52,21 @@ public void actionPerformed(ActionEvent arg0) {
 	JButton b = (JButton)arg0.getSource();
 if(b.getText().equals("Mole")) {
 	drawButtons(r.nextInt(24));
+	mw++;
 }
 else {
 	drawButtons(r.nextInt(24));
 //	speak("Missed!");
+	fails++;
+	mw++;
+}
+if(mw >= 10) {
+	f.dispose();
+	endGame(new Date(), mw);
+}
+if(fails >= 5) {
+	f.dispose();
+	endGame(new Date(), mw);
 }
 }
 static void speak(String words) {
@@ -68,5 +85,12 @@ static void speak(String words) {
             e.printStackTrace();
         }
     }
+}
+
+private void endGame(Date timeAtStart, int molesWhacked) { 
+    Date timeAtEnd = new Date();
+    JOptionPane.showMessageDialog(null, "Your whack rate is "
+            + ((timeAtEnd.getTime() - timeAtStart.getTime()) / 1000.00 / molesWhacked)
+                  + " moles per second.");
 }
 }
